@@ -1,7 +1,4 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/python,vim,macos,linux
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,vim,macos,linux
-
 ### Linux ###
 *~
 
@@ -205,4 +202,3 @@ tags
 # Persistent undo
 [._]*.un~
 
-# End of https://www.toptal.com/developers/gitignore/api/python,vim,macos,linux

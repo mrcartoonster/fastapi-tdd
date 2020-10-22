@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-:
 from app.config import Settings, get_settings
 from fastapi import Depends, FastAPI
 
@@ -6,7 +6,7 @@ app = FastAPI()
 
 
 @app.get("/ping")
-def pong(settings: Settings = Depends(get_settings)):
+async def pong(settings: Settings = Depends(get_settings)):
     return {
         "ping": "pong!",
         "environment": settings.environment,
