@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from fastapi import Depends, FastAPI
-
 from config import Settings, get_settings
+from fastapi import Depends, FastAPI
 
 app = FastAPI()
 
