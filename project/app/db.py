@@ -1,24 +1,28 @@
 # -*- coding: utf-8 -*-
-import logging
+# project/app/db.py
+
+
+import logging  # new
 import os
 
 from fastapi import FastAPI
-from tortoise import Tortoise, run_async
+from tortoise import Tortoise, run_async  # updated
 from tortoise.contrib.fastapi import register_tortoise
 
-log = logging.getLogger(__name__)
+log = logging.getLogger(__name__)  # new
 
 
 def init_db(app: FastAPI) -> None:
     register_tortoise(
         app,
-        db_url=os.environ.get("DATBASE_URL"),
-        modules={"modles": ["app.models.tortoise"]},
+        db_url=os.environ.get("DATABASE_URL"),
+        modules={"models": ["app.models.tortoise"]},
         generate_schemas=False,
         add_exception_handlers=True,
     )
 
 
+# new
 async def generate_schema() -> None:
     log.info("Initializing Tortoise...")
 
@@ -26,10 +30,11 @@ async def generate_schema() -> None:
         db_url=os.environ.get("DATABASE_URL"),
         modules={"models": ["models.tortoise"]},
     )
-    log.info("Generating database schema via Tortoise")
+    log.info("Generating database schema via Tortoise...")
     await Tortoise.generate_schemas()
     await Tortoise.close_connections()
 
 
+# new
 if __name__ == "__main__":
     run_async(generate_schema())
