@@ -1,0 +1,41 @@
+FROM python:3.8.6-slim-buster
+
+# Create directory for the app user
+RUN mkdir -p /home/app
+
+# Create the app user
+RUN addgroup --system app && adduser --sys
+
+# Create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/web
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV ENVIRONMENT prod
+ENV TESTING 0
+
+# Install system dependencies
+RUN apt-get update \
+            && apt-get -y install netcat gcc postgresql \
+            && apt-get clean
+
+# Install python dependencies
+RUN pip install --upgrade pip
+COPY ./requirments.txt .
+RUN pip install -r requirements.txt
+
+# Add App
+COPY . .
+
+# CHOWN all the file to the app user
+RUN chown -R app:app $APP_HOME
+
+# Change to the app user
+USER app
+
+# Run gunicorn
+CMD gunicorn --bind 0.0.0.0:$PORT app.main:app -k uvicorn.workers.UvicornWorker
