@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # The pydantic models for validation
 
-from pydantic import BaseModel
+from pydantic import AnyHttpUrl, BaseModel
 
 
 class SummaryPayloadSchema(BaseModel):
-    url: str
+    url: AnyHttpUrl
 
 
 class SummaryResponseSchema(SummaryPayloadSchema):
