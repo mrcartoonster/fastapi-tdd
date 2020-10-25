@@ -77,3 +77,19 @@ def test_data_list():
         },
     ]
     return test_data
+
+
+@pytest.fixture(scope="function")
+def test_request_payload():
+    """
+    This is just a dummy payload for a request.
+    """
+    return {"url": "https://foo.bar"}
+
+
+@pytest.fixture(scope="function")
+def test_response_payload():
+    """
+    Dummy payload response.
+    """
+    return {"id": 1, "url": "https://foo.bar"}
