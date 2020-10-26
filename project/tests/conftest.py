@@ -8,6 +8,21 @@ from app.main import create_application
 from starlette.testclient import TestClient
 from tortoise.contrib.fastapi import register_tortoise
 
+urls = [
+    (
+        "https://lifehacker.com/how-can-i-find-out-if"
+        "-my-partner-is-interacting-with-ca-1845461967"
+    ),
+    (
+        "https://vitals.lifehacker.com/"
+        "theres-now-an-fda-approved-treatment-for-covid-19-1845465558"
+    ),
+    (
+        "https://vitals.lifehacker.com/"
+        "theres-now-an-fda-approved-treatment-for-covid-19-1845465558"
+    ),
+]
+
 
 def get_settings_override():
     return Settings(
@@ -79,12 +94,12 @@ def test_data_list():
     return test_data
 
 
-@pytest.fixture(scope="function")
-def test_request_payload():
+@pytest.fixture(scope="function", params=urls)
+def test_request_payload(request):
     """
     This is just a dummy payload for a request.
     """
-    return {"url": "https://foo.bar"}
+    return request.param
 
 
 @pytest.fixture(scope="function")
@@ -93,3 +108,11 @@ def test_response_payload():
     Dummy payload response.
     """
     return {"id": 1, "url": "https://foo.bar"}
+
+
+@pytest.fixture(scope="function", params=urls)
+def dummy_url(request):
+    """
+    Dummy URLs for the summerizer to chew on.
+    """
+    return request.param
