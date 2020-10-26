@@ -18,6 +18,9 @@ router = APIRouter()
 async def create_summary(
     payload: SummaryPayloadSchema,
 ) -> SummaryResponseSchema:
+    """
+    Yo Mama!
+    """
     summary_id = await crud.post(payload)
 
     response_object = {
@@ -31,6 +34,9 @@ async def create_summary(
 async def read_summary(
     id: int = Path(..., title="Retreiving summary", gt=0)
 ) -> SummarySchema:
+    """
+    Yo Daddy!
+    """
     summary = await crud.get(id)
     if not summary:
         raise HTTPException(status_code=404, detail="Summary not found")
@@ -47,6 +53,9 @@ async def read_all_summaries() -> List[SummarySchema]:
 async def delete_summary(
     id: int = Path(..., title="Remove summary by it's id", gt=0)
 ) -> SummaryResponseSchema:
+    """
+    Yo Papi!
+    """
     summary = await crud.get(id)
     if not summary:
         raise HTTPException(status_code=404, detail="Summary not found")
