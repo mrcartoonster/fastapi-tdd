@@ -97,6 +97,8 @@ PyYAML = "==5.3.1"
 Rx = "==1.6.1"
 gunicorn = "*"
 pytest-xdist = "*"
+newspaper3k = "*"
+nltk = "*"
 
 [requires]
 python_version = "3.8"
