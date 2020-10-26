@@ -96,6 +96,7 @@ PyPika = "==0.42.1"
 PyYAML = "==5.3.1"
 Rx = "==1.6.1"
 gunicorn = "*"
+pytest-xdist = "*"
 
 [requires]
 python_version = "3.8"

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # project/app/api/crud.py
-# This where the link between FastAPI gets to query the database.
-# Either adding items to the database or querying from the database.
-
+# These are the helper functions to the make calls to the postgres db table
+# textsummary. This is where FastAPI function calls get the information from.
 
 from typing import List, Union
 

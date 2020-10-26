@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+from datetime import datetime
 
 import pytest
 from app.config import Settings, get_settings
@@ -40,3 +41,55 @@ def test_app_with_db():
     with TestClient(app) as test_client:
 
         yield test_client
+
+
+@pytest.fixture(scope="function")
+def test_data():
+    """
+    This fixture returns a single mock summary.
+    """
+    data = {
+        "id": 1,
+        "url": "https://foo.bar",
+        "summary": "summary",
+        "created_at": datetime.utcnow().isoformat(),
+    }
+    return data
+
+
+@pytest.fixture(scope="function")
+def test_data_list():
+    """
+    This fixture returns a moce list of summaries.
+    """
+    test_data = [
+        {
+            "id": 1,
+            "url": "https://foo.bar",
+            "summary": "summary",
+            "created_at": datetime.utcnow().isoformat(),
+        },
+        {
+            "id": 2,
+            "url": "https://testdrivenn.io",
+            "summary": "summary",
+            "created_at": datetime.utcnow().isoformat(),
+        },
+    ]
+    return test_data
+
+
+@pytest.fixture(scope="function")
+def test_request_payload():
+    """
+    This is just a dummy payload for a request.
+    """
+    return {"url": "https://foo.bar"}
+
+
+@pytest.fixture(scope="function")
+def test_response_payload():
+    """
+    Dummy payload response.
+    """
+    return {"id": 1, "url": "https://foo.bar"}
